@@ -2,4 +2,4 @@
 include:
   - project: 'DevOps/gitlab-templates'
     ref: master
-    file: '/include/aptos/uniswap-lumio.yml'
+    file: '/include/pontem/uniswap-lumio.yml'
