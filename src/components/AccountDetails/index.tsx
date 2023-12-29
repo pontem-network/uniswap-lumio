@@ -9,23 +9,16 @@ import { AutoRow } from '../Row';
 import Copy from './Copy';
 import Transaction from './Transaction';
 
-import { SUPPORTED_WALLETS } from '../../constants';
-import { ReactComponent as Close } from '../../assets/images/x.svg';
-import { getEtherscanLink } from '../../utils';
-import {
-  injected,
-  walletconnect,
-  walletlink,
-  // fortmatic, portis
-} from '../../connectors';
+import { ExternalLink as LinkIcon } from 'react-feather';
 import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg';
 import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg';
-// import FortmaticIcon from '../../assets/images/fortmaticIcon.png';
-// import PortisIcon from '../../assets/images/portisIcon.png';
-import Identicon from '../Identicon';
-import { ButtonSecondary } from '../Button';
-import { ExternalLink as LinkIcon } from 'react-feather';
+import { ReactComponent as Close } from '../../assets/images/x.svg';
+import { injected, walletconnect, walletlink } from '../../connectors';
 import { ExternalLink, LinkStyledButton, TYPE } from '../../theme';
+import { getEtherscanLink } from '../../utils';
+import { ButtonSecondary } from '../Button';
+import Identicon from '../Identicon';
+import { useDisconnect } from '@web3modal/ethers5/react';
 
 const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
@@ -163,13 +156,6 @@ const CloseColor = styled(Close)`
   }
 `;
 
-const WalletName = styled.div`
-  width: initial;
-  font-size: 0.825rem;
-  font-weight: 500;
-  color: ${({ theme }) => theme.text3};
-`;
-
 const IconWrapper = styled.div<{ size?: number }>`
   ${({ theme }) => theme.flexColumnNoWrap};
   align-items: center;
@@ -228,23 +214,12 @@ export default function AccountDetails({
   pendingTransactions,
   confirmedTransactions,
   ENSName,
-  openOptions,
 }: AccountDetailsProps) {
-  const { chainId, account, connector } = useActiveWeb3React();
+  const { chainId, account, connector, isConnected } = useActiveWeb3React();
+  const { disconnect } = useDisconnect();
+
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch<AppDispatch>();
-
-  function formatConnectorName() {
-    const { ethereum } = window;
-    const isMetaMask = !!(ethereum && ethereum.isMetaMask);
-    const name = Object.keys(SUPPORTED_WALLETS)
-      .filter(
-        (k) =>
-          SUPPORTED_WALLETS[k].connector === connector && (connector !== injected || isMetaMask === (k === 'METAMASK'))
-      )
-      .map((k) => SUPPORTED_WALLETS[k].name)[0];
-    return <WalletName>Connected with {name}</WalletName>;
-  }
 
   function getStatusIcon() {
     if (connector === injected) {
@@ -306,26 +281,17 @@ export default function AccountDetails({
           <YourAccount>
             <InfoCard>
               <AccountGroupingRow>
-                {formatConnectorName()}
                 <div>
-                  {connector !== injected && connector !== walletlink && (
+                  {isConnected && (
                     <WalletAction
                       style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px' }}
                       onClick={() => {
-                        (connector as any).close();
+                        disconnect && disconnect();
                       }}
                     >
                       Disconnect
                     </WalletAction>
                   )}
-                  <WalletAction
-                    style={{ fontSize: '.825rem', fontWeight: 400 }}
-                    onClick={() => {
-                      openOptions();
-                    }}
-                  >
-                    Change
-                  </WalletAction>
                 </div>
               </AccountGroupingRow>
               <AccountGroupingRow id="web3-account-identifier-row">

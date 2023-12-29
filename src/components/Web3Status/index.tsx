@@ -27,6 +27,8 @@ import { ButtonSecondary } from '../Button';
 import Identicon from '../Identicon';
 import Loader from '../Loader';
 
+import { useWeb3Modal } from '@web3modal/ethers5/react';
+import { useActiveWeb3React } from 'hooks';
 import { RowBetween } from '../Row';
 import WalletModal from '../WalletModal';
 
@@ -161,9 +163,11 @@ function StatusIcon({ connector }: { connector: AbstractConnector }) {
 }
 
 function Web3StatusInner() {
-  const { t } = useTranslation();
-  const { account, connector, error } = useWeb3React();
+  const { open } = useWeb3Modal();
 
+  const { t } = useTranslation();
+  const { connector, error } = useWeb3React();
+  const { account } = useActiveWeb3React();
   const { ENSName } = useENSName(account ?? undefined);
 
   const allTransactions = useAllTransactions();
@@ -202,7 +206,7 @@ function Web3StatusInner() {
     );
   } else {
     return (
-      <Web3StatusConnect id="connect-wallet" onClick={toggleWalletModal} faded={!account}>
+      <Web3StatusConnect id="connect-wallet" onClick={() => open()} faded={!account}>
         <Text>{t('Connect to a wallet')}</Text>
       </Web3StatusConnect>
     );

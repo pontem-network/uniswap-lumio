@@ -23,7 +23,7 @@ import { useCurrency, useAllTokens } from '../../hooks/Tokens';
 import { ApprovalState, useApproveCallbackFromTrade } from '../../hooks/useApproveCallback';
 import { useSwapCallback } from '../../hooks/useSwapCallback';
 import useWrapCallback, { WrapType } from '../../hooks/useWrapCallback';
-import { useToggleSettingsMenu, useWalletModalToggle } from '../../state/application/hooks';
+import { useToggleSettingsMenu } from '../../state/application/hooks';
 import { Field } from '../../state/swap/actions';
 import {
   useDefaultsFromURLSearch,
@@ -38,6 +38,7 @@ import { computeTradePriceBreakdown, warningSeverity } from '../../utils/prices'
 import AppBody from '../AppBody';
 import { ClickableText } from '../Pool/styleds';
 import Loader from '../../components/Loader';
+import { useWeb3Modal } from '@web3modal/ethers5/react';
 
 export default function Swap() {
   const loadedUrlParams = useDefaultsFromURLSearch();
@@ -68,8 +69,7 @@ export default function Swap() {
   const theme = useContext(ThemeContext);
 
   // toggle wallet when disconnected
-  const toggleWalletModal = useWalletModalToggle();
-
+  const { open } = useWeb3Modal();
   // for expert mode
   const toggleSettings = useToggleSettingsMenu();
   const [isExpertMode] = useExpertModeManager();
@@ -345,7 +345,7 @@ export default function Swap() {
 
           <BottomGrouping>
             {!account ? (
-              <ButtonPrimary onClick={toggleWalletModal}>Connect Wallet</ButtonPrimary>
+              <ButtonPrimary onClick={() => open()}>Connect Wallet</ButtonPrimary>
             ) : showWrap ? (
               <ButtonPrimary disabled={Boolean(wrapInputError)} onClick={onWrap}>
                 {wrapInputError ??

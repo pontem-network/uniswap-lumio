@@ -1,8 +1,9 @@
+import { useWeb3Modal, useWeb3ModalAccount } from '@web3modal/ethers5/react';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useActiveWeb3React } from '../../hooks';
 import { AppDispatch, AppState } from '../index';
-import { addPopup, ApplicationModal, PopupContent, removePopup, setOpenModal } from './actions';
+import { ApplicationModal, PopupContent, addPopup, removePopup, setOpenModal } from './actions';
 
 export function useBlockNumber(): number | undefined {
   const { chainId } = useActiveWeb3React();
@@ -32,7 +33,10 @@ export function useCloseModals(): () => void {
 }
 
 export function useWalletModalToggle(): () => void {
-  return useToggleModal(ApplicationModal.WALLET);
+  const { isConnected } = useWeb3ModalAccount();
+  const toggle = useToggleModal(ApplicationModal.WALLET);
+  const { open } = useWeb3Modal();
+  return isConnected ? toggle : open;
 }
 
 export function useToggleSettingsMenu(): () => void {

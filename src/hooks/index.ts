@@ -2,15 +2,37 @@ import { Web3Provider } from '@ethersproject/providers';
 import { ChainId } from '@uniswap/sdk';
 import { useWeb3React as useWeb3ReactCore } from '@web3-react/core';
 import { Web3ReactContextInterface } from '@web3-react/core/dist/types';
+import { useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/ethers5/react';
 import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { injected } from '../connectors';
 import { NetworkContextName } from '../constants';
 
-export function useActiveWeb3React(): Web3ReactContextInterface<Web3Provider> & { chainId?: ChainId } {
-  const context = useWeb3ReactCore<Web3Provider>();
+export function useActiveWeb3React(): Web3ReactContextInterface<Web3Provider> & {
+  chainId?: ChainId;
+  isConnected?: boolean
+} {
   const contextNetwork = useWeb3ReactCore<Web3Provider>(NetworkContextName);
-  return context.active ? context : contextNetwork;
+  const [library, setLibrary] = useState<Web3Provider | undefined>();
+
+  const { address, chainId, isConnected } = useWeb3ModalAccount();
+  const { walletProvider } = useWeb3ModalProvider();
+
+  useEffect(() => {
+    if (walletProvider) {
+      const lib = new Web3Provider(walletProvider);
+      setLibrary(lib);
+    }
+  }, [walletProvider]);
+
+  return walletProvider && isConnected
+    ? ({
+        account: address,
+        chainId,
+        library,
+        isConnected
+      } as any)
+    : contextNetwork;
 }
 
 export function useEagerConnect() {

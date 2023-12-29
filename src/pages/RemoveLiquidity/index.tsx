@@ -7,26 +7,33 @@ import { ArrowDown, Plus } from 'react-feather';
 import { RouteComponentProps } from 'react-router';
 import { Text } from 'rebass';
 import { ThemeContext } from 'styled-components';
-import { ButtonPrimary, ButtonError, ButtonConfirmed } from '../../components/Button';
+import { ButtonConfirmed, ButtonError, ButtonPrimary } from '../../components/Button';
 import { GreyCard, LightCard } from '../../components/Card';
 import { AutoColumn, ColumnCenter } from '../../components/Column';
-import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal';
 import CurrencyInputPanel from '../../components/CurrencyInputPanel';
 import DoubleCurrencyLogo from '../../components/DoubleLogo';
 import { AddRemoveTabs } from '../../components/NavigationTabs';
 import { MinimalPositionCard } from '../../components/PositionCard';
 import Row, { RowBetween, RowFixed } from '../../components/Row';
+import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal';
 
-import Slider from '../../components/Slider';
 import CurrencyLogo from '../../components/CurrencyLogo';
-import { ROUTER_ADDRESS, LP_TOKEN_NAME } from '../../constants';
+import Slider from '../../components/Slider';
+import { LP_TOKEN_NAME, ROUTER_ADDRESS } from '../../constants';
 import { useActiveWeb3React } from '../../hooks';
 import { useCurrency } from '../../hooks/Tokens';
 import { usePairContract } from '../../hooks/useContract';
 import useIsArgentWallet from '../../hooks/useIsArgentWallet';
 import useTransactionDeadline from '../../hooks/useTransactionDeadline';
 
+import { BigNumber } from '@ethersproject/bignumber';
+import { useWeb3Modal } from '@web3modal/ethers5/react';
+import { Dots } from '../../components/swap/styleds';
+import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback';
+import { Field } from '../../state/burn/actions';
+import { useBurnActionHandlers, useBurnState, useDerivedBurnInfo } from '../../state/burn/hooks';
 import { useTransactionAdder } from '../../state/transactions/hooks';
+import { useUserSlippageTolerance } from '../../state/user/hooks';
 import { StyledInternalLink, TYPE } from '../../theme';
 import { calculateGasMargin, calculateSlippageAmount, getRouterContract } from '../../utils';
 import { currencyId } from '../../utils/currencyId';
@@ -34,14 +41,6 @@ import useDebouncedChangeHandler from '../../utils/useDebouncedChangeHandler';
 import { wrappedCurrency } from '../../utils/wrappedCurrency';
 import AppBody from '../AppBody';
 import { ClickableText, MaxButton, Wrapper } from '../Pool/styleds';
-import { useApproveCallback, ApprovalState } from '../../hooks/useApproveCallback';
-import { Dots } from '../../components/swap/styleds';
-import { useBurnActionHandlers } from '../../state/burn/hooks';
-import { useDerivedBurnInfo, useBurnState } from '../../state/burn/hooks';
-import { Field } from '../../state/burn/actions';
-import { useWalletModalToggle } from '../../state/application/hooks';
-import { useUserSlippageTolerance } from '../../state/user/hooks';
-import { BigNumber } from '@ethersproject/bignumber';
 
 export default function RemoveLiquidity({
   history,
@@ -59,8 +58,7 @@ export default function RemoveLiquidity({
   const theme = useContext(ThemeContext);
 
   // toggle wallet when disconnected
-  const toggleWalletModal = useWalletModalToggle();
-
+  const { open } = useWeb3Modal();
   // burn state
   const { independentField, typedValue } = useBurnState();
   const { pair, parsedAmounts, error } = useDerivedBurnInfo(currencyA ?? undefined, currencyB ?? undefined);
@@ -654,7 +652,7 @@ export default function RemoveLiquidity({
             )}
             <div style={{ position: 'relative' }}>
               {!account ? (
-                <ButtonPrimary onClick={toggleWalletModal}>Connect Wallet</ButtonPrimary>
+                <ButtonPrimary onClick={() => open()}>Connect Wallet</ButtonPrimary>
               ) : (
                 <RowBetween>
                   <ButtonConfirmed

@@ -13,10 +13,11 @@ import { Colors } from './styled';
 export * from './components';
 
 const MEDIA_WIDTHS = {
-  upToExtraSmall: 540,
+  upToExtraSmall: 648,
   upToSmall: 720,
   upToMedium: 960,
   upToLarge: 1280,
+  upToExtraLarge: 1480,
 };
 
 const mediaWidthTemplates: { [width in keyof typeof MEDIA_WIDTHS]: typeof css } = Object.keys(MEDIA_WIDTHS).reduce(
@@ -96,6 +97,9 @@ export function theme(darkMode: boolean): DefaultTheme {
 
     //shadows
     shadow1: darkMode ? '#000' : '#2F80ED',
+    shadow2: darkMode
+      ? 'none'
+      : 'rgba(0,0,0,0.01) 0px 0px 1px, rgba(0,0,0,0.04) 0px 4px 8px, rgba(0,0,0,0.04) 0px 16px 24px, rgba(0,0,0,0.01) 0px 24px 32px',
 
     // media queries
     mediaWidth: mediaWidthTemplates,

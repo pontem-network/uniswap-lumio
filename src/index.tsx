@@ -1,9 +1,11 @@
 import { createWeb3ReactRoot, Web3ReactProvider } from '@web3-react/core';
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react';
 import 'inter-ui';
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
+import { mainnet, metadata, projectId } from './connectors/web3Modal';
 import { NetworkContextName } from './constants';
 import './i18n';
 import App from './pages/App';
@@ -17,6 +19,12 @@ import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme';
 import getLibrary from './utils/getLibrary';
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName);
+
+createWeb3Modal({
+  ethersConfig: defaultConfig({ metadata }),
+  chains: [mainnet],
+  projectId,
+});
 
 if ('ethereum' in window) {
   (window.ethereum as any).autoRefreshOnNetworkChange = false;

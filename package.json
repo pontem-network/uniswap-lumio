@@ -87,12 +87,13 @@
     "build": "craco build",
     "test": "craco test --env=jsdom",
     "eject": "craco eject",
-    "postinstall": "rm -rf ./node_modules/@uniswap/sdk; cp -r ./forks/@uniswap/sdk ./node_modules/@uniswap/sdk; cp ./forks/default-token-list.json ./node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json",
+    "postinstall": "rm -rf ./node_modules/@uniswap/sdk; cp -r ./forks/@uniswap/sdk ./node_modules/@uniswap/sdk; cp ./forks/default-token-list.json ./node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json; rm -rf node_modules/@web3modal/ui/dist; cp -r ./forks/@web3modal-ui/dist node_modules/@web3modal/ui/dist",
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@types/lodash": "^4.14.74",
     "@uniswap/default-token-list": "2.0.0",
+    "@web3modal/ethers5": "^3.5.3",
     "dotenv": "10.0.0",
     "web3-utils": "1.5.3"
   },

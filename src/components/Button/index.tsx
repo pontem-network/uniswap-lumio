@@ -169,6 +169,42 @@ const ButtonErrorStyle = styled(Base)`
   }
 `;
 
+export const ClaimButton = styled(ButtonSecondary)`
+    width: 240px;
+    background: ${({ theme }) => theme.bg3};
+    color: ${({ theme }) => theme.text1};
+    border: 1px solid ${({ theme }) => theme.bg3};
+    
+    box-shadow: ${({theme}) => theme.shadow2};
+    height:36px;
+    :hover,
+    :active,
+    :focus {
+      background-color: ${({ theme }) => lighten(0.05, theme.bg3)};
+      border: 1px solid ${({ theme }) => darken(0.1, theme.bg3)};
+      box-shadow: ${({theme}) => theme.shadow2};
+      :focus {
+        border: 1px solid ${({ theme }) => darken(0.1, theme.bg3)};
+        box-shadow: ${({theme}) => theme.shadow2};
+      }
+    }
+    @media only screen and (max-width: 648px) {
+      width: auto;
+    }
+`;
+
+const StyledClaimSVG = styled.svg`
+  & path {
+    fill: ${({ theme }) => theme.text1};
+  }
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
+  @media only screen and (max-width: 648px) {
+    margin-right: 0px;
+  }
+`;
+
 export function ButtonConfirmed({
   confirmed,
   altDisabledStyle,
@@ -208,5 +244,17 @@ export function ButtonDropdownLight({ disabled = false, children, ...rest }: { d
         <ChevronDown size={24} />
       </RowBetween>
     </ButtonOutlined>
+  );
+}
+
+export function ClaimIcon() {
+  return (
+    <StyledClaimSVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12.1875 0.829102C12.8342 0.829102 13.3584 1.35334 13.3584 2.00003V11.9352L14.7544 10.5392C15.2117 10.082 15.9531 10.082 16.4104 10.5392C16.8676 10.9965 16.8676 11.7379 16.4104 12.1952L13.0147 15.5909C12.5574 16.0481 11.816 16.0481 11.3588 15.5909L7.96307 12.1952C7.5058 11.7379 7.5058 10.9965 7.96307 10.5392C8.42035 10.082 9.16174 10.082 9.61901 10.5392L11.0166 11.9368V2.00003C11.0166 1.35334 11.5408 0.829102 12.1875 0.829102ZM5.81195 4.5238C6.26922 4.06652 6.26922 3.32513 5.81195 2.86786C5.35467 2.41058 4.61329 2.41058 4.15601 2.86786C-0.279869 7.30374 -0.279869 14.4947 4.15601 18.9305C8.59189 23.3664 15.7828 23.3664 20.2187 18.9305C24.6546 14.4947 24.6546 7.30374 20.2187 2.86786C19.7614 2.41058 19.02 2.41058 18.5628 2.86786C18.1055 3.32513 18.1055 4.06652 18.5628 4.5238C22.0841 8.04513 22.0841 13.7533 18.5628 17.2746C15.0414 20.7959 9.33328 20.7959 5.81195 17.2746C2.29062 13.7533 2.29062 8.04513 5.81195 4.5238Z"
+      />
+    </StyledClaimSVG>
   );
 }

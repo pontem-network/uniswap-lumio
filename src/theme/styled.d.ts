@@ -59,6 +59,7 @@ declare module 'styled-components' {
 
     // shadows
     shadow1: string;
+    shadow2: string;
 
     // media queries
     mediaWidth: {
@@ -66,6 +67,7 @@ declare module 'styled-components' {
       upToSmall: ThemedCssFunction<DefaultTheme>;
       upToMedium: ThemedCssFunction<DefaultTheme>;
       upToLarge: ThemedCssFunction<DefaultTheme>;
+      upToExtraLarge: ThemedCssFunction<DefaultTheme>;
     };
 
     // css snippets
