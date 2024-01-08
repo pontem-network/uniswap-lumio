@@ -46,8 +46,10 @@ Welcome to the Uniswap V2 ( CoolSwap-interface ) fork project! This is a customi
    # block explorer url
    REACT_APP_EXPLORER_URL=
 
+   # development / production
+   NODE_ENV=
+
    GENERATE_SOURCEMAP=false
-   NODE_ENV=development
    ```
 
 
