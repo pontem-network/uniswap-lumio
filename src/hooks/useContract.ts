@@ -1,7 +1,7 @@
 import { Contract } from '@ethersproject/contracts';
-import   STAKING_REWARDS_ABI   from '@uniswap/liquidity-staker/build/StakingRewards.json';
+import STAKING_REWARDS_ABI from '@uniswap/liquidity-staker/build/StakingRewards.json';
 import { ChainId, WETH } from '@uniswap/sdk';
-import  IUniswapV2PairABI  from '@uniswap/v2-core/build/IUniswapV2Pair.json';
+import IUniswapV2PairABI from '@uniswap/v2-core/build/IUniswapV2Pair.json';
 import { useMemo } from 'react';
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -37,7 +37,7 @@ export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: b
 
 export function useWETHContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React();
-  return useContract(chainId ? WETH[chainId].address : undefined, WETH_ABI, withSignerIfPossible);
+  return useContract(chainId && WETH[chainId] ? WETH[chainId].address : undefined, WETH_ABI, withSignerIfPossible);
 }
 
 export function useArgentWalletDetectorContract(): Contract | null {

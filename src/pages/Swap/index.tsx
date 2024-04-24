@@ -105,6 +105,7 @@ export default function Swap() {
 
   const handleTypeInput = useCallback(
     (value: string) => {
+      setApprovalSubmitted(false);
       onUserInput(Field.INPUT, value);
     },
     [onUserInput]
