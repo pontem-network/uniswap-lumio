@@ -29,7 +29,7 @@ describe('utils', () => {
       expect(getEtherscanLink(3, 'abc', 'address')).toEqual('https://ropsten.etherscan.io/address/abc');
     });
     it('enum', () => {
-      expect(getEtherscanLink(ChainId.LUMIO, 'abc', 'address')).toEqual('https://explorer.testnet.lumio.io/address/abc');
+      expect(getEtherscanLink(ChainId.LUMIO, 'abc', 'address')).toEqual('https://explorer.lumio.io/address/abc');
     });
   });
 

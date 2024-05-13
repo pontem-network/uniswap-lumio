@@ -3,7 +3,7 @@ export declare type BigintIsh = JSBI | bigint | string;
 export declare enum ChainId {
     MAINNET = 1,
     ROPSTEN = 3,
-    LUMIO = 9990,
+    LUMIO = 8866,
     GÖRLI = 5,
     KOVAN = 42
 }

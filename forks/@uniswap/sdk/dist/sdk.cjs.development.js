@@ -22,7 +22,7 @@ var _SOLIDITY_TYPE_MAXIMA;
 (function (ChainId) {
   ChainId[ChainId["MAINNET"] = 1] = "MAINNET";
   ChainId[ChainId["ROPSTEN"] = 3] = "ROPSTEN";
-  ChainId[ChainId["LUMIO"] = 9990] = "LUMIO";
+  ChainId[ChainId["LUMIO"] = 8866] = "LUMIO";
   ChainId[ChainId["G\xD6RLI"] = 5] = "G\xD6RLI";
   ChainId[ChainId["KOVAN"] = 42] = "KOVAN";
 })(exports.ChainId || (exports.ChainId = {}));

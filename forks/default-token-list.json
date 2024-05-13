@@ -346,7 +346,7 @@
         "address": "0x8ac3404A85bd98F578e006F3fD56c82398d6216F",
         "symbol": "USDC",
         "decimals": 18,
-        "chainId": 9990,
+        "chainId": 8866,
         "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735/logo.png"
       },
       {
@@ -354,7 +354,7 @@
         "address": "0xB09C234Bac6185D54085a5C39782c97f98c8E06b",
         "symbol": "USDT",
         "decimals": 18,
-        "chainId": 9990,
+        "chainId": 8866,
         "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xF9bA5210F91D0474bd1e1DcDAeC4C58E359AaD85/logo.png"
       },
       {
@@ -362,7 +362,7 @@
         "address": "0x1F3dBeBA2513E87642750a278649dc828d054971",
         "symbol": "WETH",
         "decimals": 18,
-        "chainId": 9990,
+        "chainId": 8866,
         "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x1F3dBeBA2513E87642750a278649dc828d054971/logo.png"
       },
       {

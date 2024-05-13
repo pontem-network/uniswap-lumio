@@ -99,7 +99,7 @@ function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddress
   return {
     1: { ...map1[1], ...map2[1] },
     3: { ...map1[3], ...map2[3] },
-    9990: { ...map1[9990], ...map2[9990] },
+    8866: { ...map1[8866], ...map2[8866] },
     5: { ...map1[5], ...map2[5] },
     42: { ...map1[42], ...map2[42] },
   };

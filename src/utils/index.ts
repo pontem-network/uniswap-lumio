@@ -20,7 +20,7 @@ export function isAddress(value: any): string | false {
 const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   1: 'etherscan.io',
   3: 'ropsten.etherscan.io',
-  9990: 'explorer.testnet.lumio.io',
+  8866: 'explorer.lumio.io',
   5: 'goerli.etherscan.io',
   42: 'kovan.etherscan.io',
 };

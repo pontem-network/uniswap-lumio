@@ -34,8 +34,8 @@ export const MKR = new Token(ChainId.MAINNET, '0x9f8F72aA9304c8B593d555F12eF6589
 export const AMPL = new Token(ChainId.MAINNET, '0xD46bA6D942050d489DBd938a2C909A5d5039A161', 9, 'AMPL', 'Ampleforth');
 export const WBTC = new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 8, 'WBTC', 'Wrapped BTC');
 
-export const LUMIO_USDC = new Token(9990, '0x8ac3404A85bd98F578e006F3fD56c82398d6216F', 18, 'USDC', 'USD//C');
-export const LUMIO_USDT = new Token(9990, '0xB09C234Bac6185D54085a5C39782c97f98c8E06b', 18, 'USDT', 'Tether USD');
+export const LUMIO_USDC = new Token(8866, '0x8ac3404A85bd98F578e006F3fD56c82398d6216F', 18, 'USDC', 'USD//C');
+export const LUMIO_USDT = new Token(8866, '0xB09C234Bac6185D54085a5C39782c97f98c8E06b', 18, 'USDT', 'Tether USD');
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 13;
