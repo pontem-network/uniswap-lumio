@@ -1,6 +1,7 @@
 FROM node:16.20.2 as build
 WORKDIR /opt/app
 COPY package.json package-lock.json ./
+COPY forks ./forks
 RUN npm ci
 COPY . .
 RUN npm run build
